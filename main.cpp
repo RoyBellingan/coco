@@ -48,6 +48,7 @@ private:
 	u_int8_t rotation = 0;
 	bool flipped = false;
 public:
+	Quad(){}
 	Quad (const Lato top, const Lato left, const Lato bot, const Lato rigth) {
 		sides[Pos::top] = top;
 		sides[Pos::bot] = bot;
@@ -74,9 +75,10 @@ public:
 
 	void flip(){
 		flipped = !flipped;
-		//top & down need flippin
-		sides[Pos::top + rotation].flip();
-		sides[(Pos::bot + rotation) % 4].flip();
+		//all need flippin
+		for (int i = 0; i < 4; ++i) {
+			sides[i].flip();
+		}
 
 		//and left/right swap
 		Lato buf = sides[Pos::left];
@@ -88,15 +90,28 @@ public:
 
 class Set{
 private:
-	Quad q1,q2,q3,q4,q5,q6;
-public:
 
+public:
+	Set(){}
+	Quad q1,q2,q3,q4,q5,q6;
 };
 
-#include <QElapsedTimer>
+Set set;
+//cosa ritorna, nome della funzione, parametri, il typedef si chiama poi delivery_function
+//typedef customRuleResult (*delivery_eva)(const evaluation_condition* condition);
 
+
+struct Match{
+
+
+
+
+};
+//#include <QElapsedTimer>
+//#include <QHash>
 int main(/*int argc, char *argv[]*/) {
 	Quad a(0b10110,0b10100,0b01110,0b11001);
+
 
 	a.flip ();
 
